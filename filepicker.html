@@ -76,20 +76,7 @@ $(function() {
         },
 
         // our playlist
-        playlist: [
-            {
-                url: 'URL_HERE.flv',
-                title: '_'
-            },
-            {
-                url: 'URL_HERE',
-                title: '_'
-            },
-            {
-                url: 'URL_HERE.flv',
-                title: '_'
-            }
-        ],
+        playlist: [{ baseUrl: "https://www.filepicker.io/api/file/wBbAPSsvR0aA07LstuDj", subTitle: "sick ass beatboxing", time: 1000 }],
 
         // show playlist buttons in controlbar
         plugins: {
@@ -105,6 +92,24 @@ $(function() {
     // from the beginning to the end.
 
     $f("player1").playlist("div.clips:first", {loop:true});
+
+    // filepicker stuff
+     filepicker.setKey('AoKgecbYtQiijJogClIM5z');
+      filepicker.pick({
+        mimetypes: [ 'video/*'],
+        container: 'modal',
+        services:['VIDEO'],
+      },
+      function(InkBlob){
+        console.log("video url: " + InkBlob.url);
+        //playlist += { url: InkBlob.url, title: 'Something'}
+
+    //    console.log(JSON.stringify(InkBlob));
+      },
+      function(FPError){
+        console.log(FPError.toString());
+      }
+);
 
 
 });
@@ -124,32 +129,11 @@ $(function() {
 
 <!-- the player using splash image -->
 <a class="player plain" id="player1" style="float:left">
-    <img class="button" src="" />
+    <img class="button" width="100px" src="img/play.png" />
 </a>
 
 <!-- let rest of the page float normally -->
 <br clear="all"/>
 
   </body>
-  <script type="text/javascript">
-  filepicker.setKey('AoKgecbYtQiijJogClIM5z');
-  filepicker.pick({
-    mimetypes: [ 'video/*'],
-    container: 'modal',
-    services:['VIDEO'],
-  },
-  function(InkBlob){
-    var url = InkBlob.url;
-
-    
-   console.log(url);
-
-    console.log("success");
-//    console.log(JSON.stringify(InkBlob));
-  },
-  function(FPError){
-    console.log(FPError.toString());
-  }
-);
-  </script>
 </html>
