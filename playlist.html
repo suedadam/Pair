@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+    
+    <title>playlist</title>
+
+    <link rel="shortcut icon" href="http://flash.flowplayer.org/favicon.ico">
+    <!-- standalone page styling. can be removed -->
+    <style>
+        body{
+            width:982px;
+            margin:50px auto;
+            font-family:sans-serif;
+        }
+        a:active {
+            outline:none;
+        }
+        :focus { -moz-outline-style:none; }
+
+        .palert {
+            padding: 12px;
+            color: black;
+            background-color: #ededed;
+            box-shadow: none;
+        }
+    </style>
+
+    
+    
+    <!-- flowplayer javascript component -->
+    <script src="http://releases.flowplayer.org/js/flowplayer-3.2.13.min.js"></script>
+
+    </head>
+
+<body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"
+    type="text/javascript" charset="utf-8"></script>
+<script src="http://releases.flowplayer.org/js/flowplayer.playlist-3.2.11.min.js"
+    type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="css/custom.css"/>
+<style>
+    /* container has a background image */
+
+a.player {
+    display:block;
+    width:500px;
+    height:340px;
+    text-align:center;
+    color:#fff;
+    text-decoration:none;
+    cursor:pointer;
+    background:#000 url('http://flash.flowplayer.org/media/img/global/gradient/h500.png') repeat-x 0 0;
+    background:-moz-linear-gradient(top,
+                                    rgba(55, 102, 152, 0.9),
+                                    rgba(6, 6, 6, 0.9));
+    -moz-box-shadow:0 0 40px rgba(100, 118, 173, 0.5);
+}
+
+a.player:hover {
+    background:-moz-linear-gradient(center top,
+                                    rgba(73, 122, 173, 0.898),
+                                    rgba(6, 6, 6, 0.898));
+}
+
+/* splash image */
+a.player img {
+    margin-top:125px;
+    border:0;
+}    #player1 {
+        margin-top:0px;
+        width:380px !important;
+    }
+</style>
+
+
+<script>
+// wait for the DOM to load using jQuery
+$(function() {
+    // set up player normally
+    $f("player1", "http://releases.flowplayer.org/swf/flowplayer-3.2.18.swf", {
+
+        // clip properties common to all playlist entries
+        clip: {
+            baseUrl: 'http://stream.flowplayer.org',
+            subTitle: 'from blib.tv video sharing site',
+            time: '20 sec'
+        },
+
+        // our playlist
+        playlist: [
+            {
+                url: 'KimAronson-TwentySeconds59483.flv',
+                title: 'Palm trees and the sun'
+            },
+            {
+                url: 'KimAronson-TwentySeconds58192.flv',
+                title: 'Happy feet in a car'
+            },
+            {
+                url: 'KimAronson-TwentySeconds63617.flv',
+                title: 'People jogging'
+            }
+        ],
+
+        // show playlist buttons in controlbar
+        plugins: {
+            controls: {
+                playlist: true
+            }
+        }
+    });
+
+
+    // here comes the magic plugin. It uses first div.clips element as the
+    // root for as playlist entries. loop parameter makes clips play
+    // from the beginning to the end.
+
+    $f("player1").playlist("div.clips:first", {loop:true});
+
+
+});
+
+</script>
+
+
+<div class="clips" style="float:left">
+
+    <!-- single playlist entry as an "template" -->
+    <a href="${url}">
+        ${title} <span>${subTitle}</span>
+        <em>${time}</em>
+    </a>
+
+</div>
+
+<!-- the player using splash image -->
+<a class="player plain" id="player1" style="float:left">
+    <img class="button" src="http://flash.flowplayer.org/media/img/player/btn/play_text_large.png" />
+</a>
+
+<!-- let rest of the page float normally -->
+<br clear="all"/>
+
+</body>
+
+</html>

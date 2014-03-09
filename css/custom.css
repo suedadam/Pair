@@ -1,0 +1,16 @@
+.mainbody {
+background-image: url('../img/yolo.jpg');
+background-repeat:no-repeat;
+background-size:contain;
+background-position:center;
+min-height: 100%;
+}
+
+.login {
+	margin-top:5%;
+	width: 70%;
+}
+.logintwitter {
+	margin-top:5%;
+	width: 90%;
+}
