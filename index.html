@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/custom.css" />
     <script src="js/vendor/modernizr.js"></script>
-    <script src="js/camera.js"></script>
-    <script src="js/facebook.js"></script>
+    <script type"text/javascript" src="https://connect.facebook.net/en_US/all.js"></script>
   </head>
   <body>
     <div class="row mainbody">
@@ -18,13 +17,61 @@
       </div> 
       <div style="margin-top:55%">
         <div class="row">
-            <center><img id="account-info" class="login" src="img/facebook.png"></img></center>
+            <center><div id="account-info" class="login">
+            </div></center>
         </div>
         <div class="row">
-          <center><img class="login" src="img/twitter.png"></img></center>
+          <center><img class="login twitter" src="img/twitter.png"></img></center>
        </div>
       </div>
 
   </div>
   </body>
+  <script>
+  FB.init({
+    appId      : '622979797777426',
+    status     : true,
+    xfbml      : true
+  });
+
+function showAccountInfo() {
+  FB.api(
+    {
+      method: 'fql.query',
+      query: 'SELECT name, pic_square FROM user WHERE uid='+FB.getUserID()
+    },
+    function(response) {
+      Log.info('API Callback', response);
+      document.getElementById('account-info').innerHTML = (
+        '<img src="' + response[0].pic_square + '"> ' +
+        response[0].name +
+        '<img id="account-info" onclick="FB.logout()" class="btn" src="img/facebook.png"></img>'
+      );
+    }
+  );
+}
+
+
+
+function showLoginButton() {
+  document.getElementById('account-info').innerHTML = (
+    '<img id="account-info" onclick="FB.login()" class="btn" src="img/facebook.png"></img>'
+  );
+}
+
+
+
+function onStatus(response) {
+  if (response.status === 'connected') {
+    showAccountInfo();
+    window.location = "filepicker.html";
+  } else {
+    showLoginButton();
+  }
+}
+FB.getLoginStatus(function(response) {
+  onStatus(response); 
+  FB.Event.subscribe('auth.statusChange', onStatus); 
+});
+</script>
 </html>
