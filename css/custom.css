@@ -13,3 +13,8 @@ min-height: 100%;
 .logintwitter {
 	margin-top:5%;
 }
+.ribbon {
+   position: relative;
+   top: -16px;
+   right: -706px;
+}
