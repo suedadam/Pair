@@ -1,0 +1,19 @@
+ <html>
+  <script type="text/javascript" src="https://api.filepicker.io/v1/filepicker.js"></script>
+  </head>
+  <script type="text/javascript">
+  filepicker.setKey('AoKgecbYtQiijJogClIM5z');
+    filepicker.pick({
+    mimetypes: [ 'video/*'],
+    container: 'modal',
+    services:['VIDEO'],
+  },
+  function(InkBlob){
+    console.log(JSON.stringify(InkBlob));
+  },
+  function(FPError){
+    console.log(FPError.toString());
+  }
+);
+  </script>
+</html>
